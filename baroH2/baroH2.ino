@@ -34,7 +34,7 @@ void setup() {
 }
 
 // Enregistrement de la pression 
-// et décalage des valeur dans le tableau
+// et décalage des valeurs dans le tableau
 void logpush(double P) {
   for(int i=95; i>0; i--) {
     logpression[i] = logpression[i-1];
@@ -43,7 +43,7 @@ void logpush(double P) {
 }
 
 // Affichage LCD de la différence de pression
-// entre la cellulle 0 (maintenant) et une cellule 
+// entre la cellule 0 (maintenant) et une cellule 
 // passée en argument
 void printdelta(int cellule) {
   char texte[6];
@@ -81,14 +81,14 @@ void loop() {
 	// prise de mesure de pressionn
         status = pressure.startPressure(3);
         if(status != 0) {
-	  // pareil, on attend comme il le veux le temps de faire la mesure
+	  // pareil, on attend comme il le veut le temps de faire la mesure
           delay(status);
 	  // on récupère la valeur compensée avec la température
           status = pressure.getPressure(P,T);
           if(status != 0) {
 	    // P est la pression absolue, il faut compenser en fonction de l'altitude
             p0 = pressure.sealevel(P,ALTITUDE);
-	    // conversion de la valeur en xxx,xx (5 digit en tout minimum, donc 2 chiffres après la virgule)
+	    // conversion de la valeur en xxx,xx (5 digits en tout minimum, donc 2 chiffres après la virgule)
             dtostrf(T, 5, 2, ligne);
             lcd.print(ligne);
             dtostrf(p0, 11, 2, ligne);
